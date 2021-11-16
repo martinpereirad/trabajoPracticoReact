@@ -5,7 +5,7 @@ import {
     Link,
     useHistory
 } from "react-router-dom";
-import CharacterItem from "./CharacterItem";
+//import CharacterItem from "./CharacterItem";
 
 
 export default function Episode(props) {
@@ -41,6 +41,7 @@ export default function Episode(props) {
                 { episode && <React.Fragment>
                                     
                                     <h3>Nombre episodio: {episode.name}</h3>
+                                    
                                     <CharacterList characters={episode.characters}/>
                                     
                                 </React.Fragment>}

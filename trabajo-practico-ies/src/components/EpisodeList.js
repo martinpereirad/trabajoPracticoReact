@@ -41,18 +41,7 @@ export default function EpisodesList(props) {
 
 
     return <div>
-                <header>
-                <Link to="/" className="btn btn-dark">
-                    Inicio
-                </Link>
-                <Link to="/user" className="btn btn-dark">
-                    User
-                </Link>
-                <Link to="/episodios" className="btn btn-dark">
-                    Episodios
-                </Link>
-                </header>
-                <hr/>
+               
                 <h2>La cantidad total de episodios es: {total} en {pages} paginas</h2>
                 <Paginacion info={info} clickPrev={nextPage} clickProx={nextPage}/>
                 <table border={1} className="container">

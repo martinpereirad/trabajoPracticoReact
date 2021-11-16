@@ -1,12 +1,8 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React from "react";
 
 export default function EpisodeItem( {episode} ) {
-    // const history = useHistory();
-
-    // const goTo = () => {
-    //     history.push(`https://rickandmortyapi.com/api/episode/${episode.id}`);
-    // }
+    
     
     return <React.Fragment>
                 <tr>

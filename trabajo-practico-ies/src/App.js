@@ -7,7 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import User from './components/User';
+
 import EpisodeList from './components/EpisodeList';
 import Inicio from './components/Inicio';
 import Episode from './components/Episode';
@@ -16,15 +16,16 @@ import {
   setUser,
   cleanUser,
 } from './components/global/global.slice';
-import Profile from './components/profile';
+
 import NewEpisode from './components/NewEpisode';
+import Paginacion from './components/Paginacion';
 
 
 
 function App() {
   const dispatch = useDispatch();
-  const position = useSelector( state => state.global.position );
   const user =useSelector(state => state.global.user);
+  const [userData, setUserData] = useState([]);
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
   const onSuccessLogin = (response) => {
@@ -34,9 +35,9 @@ function App() {
       dispatch(setUser({...response.profileObj, accessToken: response.accessToken}))
       setName(response.profileObj.name)
       setEmail(response.profileObj.email)
+      setUserData(response.profileObj)
     }
   };
-  
   const onErrorLogin = (response) => {
     console.log("========== onError ==============", response);
     dispatch(cleanUser());
@@ -60,7 +61,14 @@ function App() {
         :
         <>
         <header>User: {name} - Email: {email}</header>
-        
+        <header>
+                <Link to="/" className="btn btn-dark">
+                    Inicio
+                </Link>
+                <Link to="/episodios" className="btn btn-dark">
+                    Episodios
+                </Link>
+        </header>
           <GoogleLogout
              clientId={"719106732100-l1ooc510d5avjgdjo3ebonq3i0dk5v14.apps.googleusercontent.com"}
              buttonText="Logout"
@@ -71,9 +79,6 @@ function App() {
         <Switch>
             <Route path="/episode/:id">
               <Episode/>
-            </Route>
-            <Route path="/user">
-              <User/>
             </Route>
             <Route path="/episodios/new">
               <NewEpisode/>

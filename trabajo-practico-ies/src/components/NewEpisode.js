@@ -1,8 +1,15 @@
+import EpisodeData from "./dataEpisode/EpisodeData";
+import { useSelector } from "react-redux";
+import EpisodeList from "./EpisodeList";
+import EpisodeCreate from "./EpisodeCreate";
 
 
-export default function NewEpisode() {
-    
+export default function NewEpisode(props) {
+    const position = useSelector( state => state.global.position );
     return  <div>
-                <p>hola</p>
+                {position === 0 &&  <EpisodeData />}
+                {position === 1 &&  <EpisodeCreate />}
+                {position === 2 &&   <EpisodeList />}
+                
             </div>
 }
