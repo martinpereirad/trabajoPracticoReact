@@ -9,30 +9,38 @@ export default function EpisodesList(props) {
     const [pages, setPages] = useState(null);
     const [total, setTotal] = useState(null);
     const [info, setInfo] = useState(null);
-    const [url, setUrl] = useState("https://rickandmortyapi.com/api/episode/");
+    const [url, setUrl] = useState("https://rickandmortyapi.com/api/episode/?name=");
+    const [search, setSearch] = useState("");
     
+
     useEffect( () => {
         
-        (async ()  => {
-            const response = await axios.get(url);
-            if(response.status === 200) {
-                const {info, results} = response.data;
-                setPages(info.pages)
-                setInfo(info);
-                setEpisodes([...results]);
-                setTotal([info.count]);
-                //setPages([info.pages])
-                console.log(info)
-            }else{
-                setInfo(null);
-                setTotal(null);
-                setEpisodes([]);       
-             }
-        })();
-  
-    }
-    ,[url]);
+        (async () => {
 
+            const Response = await axios.get(`${url}${search}`)
+                .catch(e => {
+                    setEpisodes([]);
+                });
+
+
+            if (Response && Response.status === 200) {
+                const { info, results } = Response.data;
+                setInfo(info);
+                setEpisodes([
+                    ...results,
+                ]);
+                setTotal(info.count)
+                setPages(info.pages)
+            } else {
+
+                setInfo(null);
+                setEpisodes([]);
+                
+            }
+        })();
+
+
+    }, [url, search]);
     const nextPage = (newUrl) => {
         if(newUrl) {
             setUrl(newUrl);
@@ -44,6 +52,10 @@ export default function EpisodesList(props) {
                
                 <h2>La cantidad total de episodios es: {total} en {pages} paginas</h2>
                 <Paginacion info={info} clickPrev={nextPage} clickProx={nextPage}/>
+                <label>Buscar Episodio: </label>
+                <input onChange={(e) => {
+                    setSearch(e.target.value)
+                }} type= "text" />
                 <table border={1} className="container">
                     
                     <tr >

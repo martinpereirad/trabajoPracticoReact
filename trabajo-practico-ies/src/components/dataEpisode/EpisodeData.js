@@ -8,7 +8,7 @@ import {
   saveEpisode,
 } from './EpisodeData.slice';
 
-
+import { next as nextPage } from '../global/global.slice';
 
 
 export default function EpisodeData({userId = 1}) {
@@ -36,6 +36,7 @@ export default function EpisodeData({userId = 1}) {
               air_date,
               episodeNum,
             }));
+            dispatch(nextPage())
           } else {
             setMessage("Debe completar todos los camposfdghfjghgfgd")
           }

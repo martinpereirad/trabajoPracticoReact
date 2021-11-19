@@ -5,9 +5,9 @@ import axios from 'axios';
 const initialState = {
     episodeData: {
         id: 1,
-        name: "hola",
-        air_date: "como estas",
-        episode: "yo muy bien",
+        name: "",
+        air_date: "",
+        episodeNum: "",
     }
 }
 
@@ -55,28 +55,28 @@ export const episodeData = createSlice({
         };
       },
     },
-    extraReducers: (builder) => {
-      builder
-        .addCase(loadEpisodeData.pending, (state) => {
-          console.log("loading....")
-          state.status = 'loading';
-        })
-        .addCase(loadEpisodeData.fulfilled, (state, action) => {
-          console.log("DONE")
-          state.status = 'done';
-          state.episodeData = action.payload;
-        })
-        .addCase(loadEpisodeData.rejected, (state) => {
-          state.status = 'fail';
-        })
-        .addCase(saveEpisode.pending, (state) => {
-          state.status = "loading"
-        })
-        .addCase(saveEpisode.fulfilled, (state, action) => {
-          state.status = "done"
-          state.id = action.payload;
-        })
-    },
+    // extraReducers: (builder) => {
+    //   builder
+    //     .addCase(loadEpisodeData.pending, (state) => {
+    //       console.log("loading....")
+    //       state.status = 'loading';
+    //     })
+    //     .addCase(loadEpisodeData.fulfilled, (state, action) => {
+    //       console.log("DONE")
+    //       state.status = 'done';
+    //       state.episodeData = action.payload;
+    //     })
+    //     .addCase(loadEpisodeData.rejected, (state) => {
+    //       state.status = 'fail';
+    //     })
+    //     .addCase(saveEpisode.pending, (state) => {
+    //       state.status = "loading"
+    //     })
+    //     .addCase(saveEpisode.fulfilled, (state, action) => {
+    //       state.status = "done"
+    //       state.id = action.payload;
+    //     })
+    // },
 });
 
 export const { addEpisodeData, cleanEpisodeData } = episodeData.actions;
